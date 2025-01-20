@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 
 
 
-st.set_page_config(page_title="Forecast The Fare", layout="wide")
+#st.set_page_config(page_title="Forecast The Fare", layout="wide")
 
 # Set custom CSS for background color
 def load_css():
