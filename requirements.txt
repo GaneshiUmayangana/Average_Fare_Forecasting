@@ -14,5 +14,5 @@ streamlit
 Pillow
 xgboost
 plotly
-statsmodels
+
 
