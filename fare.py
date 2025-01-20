@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly
+#import plotly
 import plotly.graph_objects as go
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error
