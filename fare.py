@@ -1,4 +1,4 @@
-!pip install statsmodels
+pip install statsmodels
 
 import streamlit as st
 import pandas as pd
