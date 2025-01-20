@@ -10,15 +10,12 @@ import plotly.graph_objects as go
 
 st.set_page_config(page_title="Forecast The Fare", layout="wide")
 
-# Set custom CSS for background image
+# Set custom CSS for background color
 st.markdown(
     f"""
     <style>
     .stApp {{
-        background-image: url('https://archives1.dailynews.lk/sites/default/files/news/2022/03/28/SriLankan%20Airlines%20Suspends%20Flights%20to%20Moscow.jpg');
-        background-size: cover;
-        background-position: center center;
-        background-attachment: fixed;
+        background-color: #f0f8ff;  /* Light blue background color */
     }}
     </style>
     """,
