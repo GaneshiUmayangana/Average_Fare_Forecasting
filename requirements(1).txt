@@ -13,3 +13,4 @@ flasgger>=0.9.7.1
 streamlit>=1.10.0
 Pillow>=9.0.0
 xgboost>=1.5.0
+plotly
