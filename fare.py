@@ -4,7 +4,8 @@ import pandas as pd
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error
 import matplotlib.pyplot as plt
-import plotly.express as go
+import plotly.graph_objects as go
+
 
 
 st.set_page_config(page_title="Forecast The Fare", layout="wide")
