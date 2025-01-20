@@ -15,4 +15,5 @@ Pillow
 xgboost
 plotly
 
-
+openpyxl
+xlsxwriter
