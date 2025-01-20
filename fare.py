@@ -11,16 +11,15 @@ import plotly.graph_objects as go
 st.set_page_config(page_title="Forecast The Fare", layout="wide")
 
 # Set custom CSS for background color
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-color: #f0f8ff;  /* Light blue background color */
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+def load_css():
+    with open(os.path.join(os.path.dirname(__file__), 'style.css')) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# Set page configuration
+st.set_page_config(page_title="Forecast The Fare", layout="wide")
+
+# Apply custom CSS
+load_css()
 
 # Title for the app
 st.title("Fare Forecasting")
