@@ -28,7 +28,6 @@ st.markdown(
 # Title for the app
 st.title("Fare Forecasting")
 
-st.title("Fare Forecasting")
 
 # File uploader
 uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx"])
