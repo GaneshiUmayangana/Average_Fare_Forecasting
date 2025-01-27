@@ -14,6 +14,6 @@ streamlit
 Pillow
 xgboost
 plotly
-
+statsmodels
 openpyxl
 xlsxwriter
