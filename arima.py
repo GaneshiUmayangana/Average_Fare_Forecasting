@@ -6,6 +6,7 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from sklearn.metrics import mean_absolute_error
 from itertools import product
 
+# Load and apply custom CSS
 def apply_custom_css(file_path):
     with open(file_path) as f:
         css = f.read()
@@ -21,6 +22,7 @@ st.set_page_config(
     layout="wide"
 )
 st.header("Average Yield Prediction")
+
 
 # Section 1: Load and preprocess data
 df = pd.read_excel('Daily Yield_Dec01 to Jan21.xlsx')
