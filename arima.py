@@ -7,16 +7,6 @@ from sklearn.metrics import mean_absolute_error
 from itertools import product
 import os
 
-# Set custom CSS for background color
-def load_css():
-    # Use relative path instead of __file__
-    css_file_path = 'style.css'  # If the CSS file is in the same directory as the script
-    if os.path.exists(css_file_path):
-        with open(css_file_path) as f:
-            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-    else:
-        st.warning("CSS file not found!")
-
 # Set page configuration
 st.set_page_config(page_title="Forecast The Fare", layout="wide")
 
