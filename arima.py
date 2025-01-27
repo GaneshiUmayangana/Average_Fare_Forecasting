@@ -10,9 +10,6 @@ import os
 # Set page configuration
 st.set_page_config(page_title="Forecast The Fare", layout="wide")
 
-# Apply custom CSS
-load_css()
-
 # Streamlit page configuration
 st.set_page_config(
     page_title="Forecasting Dashboard",
