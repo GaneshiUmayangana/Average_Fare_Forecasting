@@ -1,6 +1,12 @@
 [theme]
-primaryColor = "#E694FF"
-backgroundColor = "#00172B"
-secondaryBackgroundColor = "#0083B8"
-textColor = "#DCDCDC"
-font = "sans-serif"
+primaryColor = "#FF6347"  # Tomato Red
+backgroundColor = "#2F4F4F"  # Dark Slate Gray
+secondaryBackgroundColor = "#4682B4"  # Steel Blue
+textColor = "#F0F8FF"  # Alice Blue
+font = "Arial, Helvetica, sans-serif"  # Changed font to Arial
+
+# Border Range Configuration (if needed)
+[border]
+borderColor = "#FF4500"  # Orange Red
+borderWidth = "3px"  # 3px border width
+borderRadius = "8px"  # Rounded corners with 8px radius
