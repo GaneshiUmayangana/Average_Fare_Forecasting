@@ -29,7 +29,7 @@ if uploaded_file:
     sectors = df['Sector'].unique()
     selected_sector = st.selectbox('Select Sector', sectors)
     # Sort the dates
-    flight_dates_sorted = sorted(Flight Date)
+    flight_dates_sorted = sorted('Flight Date')
 
     # Create the selectbox for departure date
     departure_date = st.selectbox('Select Departure Date', flight_dates_sorted)
