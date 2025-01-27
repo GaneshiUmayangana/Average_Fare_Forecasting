@@ -5,10 +5,6 @@ from datetime import timedelta
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from sklearn.metrics import mean_absolute_error
 from itertools import product
-import os
-
-# Set page configuration
-st.set_page_config(page_title="Forecast The Fare", layout="wide")
 
 # Streamlit page configuration
 st.set_page_config(
