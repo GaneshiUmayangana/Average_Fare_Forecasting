@@ -5,6 +5,7 @@ from datetime import timedelta
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from sklearn.metrics import mean_absolute_error
 from itertools import product
+import os
 
 # Set custom CSS for background color
 def load_css():
