@@ -1,12 +1,12 @@
 [theme]
-primaryColor = "#B0E0E6"  # Sky Blue
-backgroundColor =  "#87CEEB" # Powder Blue
-secondaryBackgroundColor = "#4682B4"  # Steel Blue
-textColor = "#FFFFFF"  # White text for better contrast
+primaryColor = "#5F9EA0"  # Cadet Blue - a muted and sophisticated blue
+backgroundColor = "#F0F8FF"  # Alice Blue - a soft, light background
+secondaryBackgroundColor = "#4682B4"  # Steel Blue - a balanced blue shade
+textColor = "#333333"  # Dark Gray for better readability and contrast
 font = "Arial, Helvetica, sans-serif"  # Font remains Arial
 
 # Border Range Configuration (if needed)
 [border]
-borderColor = "#00BFFF"  # Deep Sky Blue for border
-borderWidth = "3px"  # 3px border width
-borderRadius = "10px"  # Slightly larger rounded corners
+borderColor = "#A9A9A9"  # Dark Gray for subtle borders
+borderWidth = "2px"  # Slightly thinner border for a cleaner look
+borderRadius = "8px"  # Rounded corners with a moderate radius
