@@ -6,16 +6,6 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from sklearn.metrics import mean_absolute_error
 from itertools import product
 
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-color: #f0f8ff;  /* Light blue background color */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # Streamlit page configuration
 st.set_page_config(
