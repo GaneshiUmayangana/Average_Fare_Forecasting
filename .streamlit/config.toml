@@ -1,12 +1,12 @@
 [theme]
-primaryColor = "#4C9F70"  # Medium Sea Green - calming and natural
-backgroundColor = "#FAF9F6"  # Very light beige - neutral and warm
-secondaryBackgroundColor = "#A9A9A9"  # Dark Gray - subtle accent to contrast with light background
-textColor = "#333333"  # Dark Charcoal - for good text readability
-font = "Helvetica, Arial, sans-serif"  # Clean and professional font
+primaryColor = "#A8DADC"  # Light Sky Blue - soft, calming blue
+backgroundColor = "#F1FAEE"  # Off-white with a hint of warmth for a clean look
+secondaryBackgroundColor = "#E0FBFC"  # Light cyan - adds a refreshing touch
+textColor = "#1D3557"  # Dark Blue - excellent readability without being too harsh
+font = "Segoe UI, Tahoma, sans-serif"  # Modern, clean, and highly readable font
 
 # Border Range Configuration (if needed)
 [border]
-borderColor = "#DCDCDC"  # Gainsboro - light gray border for a soft look
-borderWidth = "2px"  # Thin border for elegance
-borderRadius = "6px"  # Smooth corners with a moderate radius
+borderColor = "#457B9D"  # Light Steel Blue - subtle, professional border
+borderWidth = "2px"  # Thin border for a sleek, light look
+borderRadius = "6px"  # Slightly rounded corners for a soft touch
