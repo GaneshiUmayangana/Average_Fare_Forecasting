@@ -28,12 +28,9 @@ if uploaded_file:
     # Get unique sectors and flight dates for user selection
     sectors = df['Sector'].unique()
     selected_sector = st.selectbox('Select Sector', sectors)
-    # Sort the dates
-    flight_dates_sorted = sorted('Flight Date')
 
-    # Create the selectbox for departure date
-    departure_date = st.selectbox('Select Departure Date', flight_dates_sorted)
-
+    flight_dates = df['Flight Date'].unique()
+    departure_date = st.selectbox('Select Departure Date', flight_dates)
     departure_date = pd.to_datetime(departure_date)
 
     # Calculate the forecast period window (10 days before departure date)
