@@ -1,9 +1,9 @@
 [theme]
-primaryColor = "#A8DADC"  # Light Sky Blue - soft, calming blue
-backgroundColor = "#F1FAEE"  # Off-white with a hint of warmth for a clean look
-secondaryBackgroundColor = "#E0FBFC"  # Light cyan - adds a refreshing touch
-textColor = "#1D3557"  # Dark Blue - excellent readability without being too harsh
-font = "Segoe UI, Tahoma, sans-serif"  # Modern, clean, and highly readable font
+primaryColor = "#E694FF"
+backgroundColor = "#00172B"
+secondaryBackgroundColor = "#0083B8"
+textColor = "#DCDCDC"
+font = "sans-serif"
 
 # Border Range Configuration (if needed)
 [border]
