@@ -1,6 +1,6 @@
 [theme]
-primaryColor = "#87CEEB"  # Sky Blue
-backgroundColor = "#B0E0E6"  # Powder Blue
+primaryColor = "#B0E0E6"  # Sky Blue
+backgroundColor =  "#87CEEB" # Powder Blue
 secondaryBackgroundColor = "#4682B4"  # Steel Blue
 textColor = "#FFFFFF"  # White text for better contrast
 font = "Arial, Helvetica, sans-serif"  # Font remains Arial
