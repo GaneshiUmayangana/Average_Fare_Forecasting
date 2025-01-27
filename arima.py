@@ -6,6 +6,16 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from sklearn.metrics import mean_absolute_error
 from itertools import product
 
+# Load and apply custom CSS
+def load_css(file_path):
+    if os.path.exists(file_path):
+        with open(file_path, "r") as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    else:
+        st.error(f"CSS file not found: {file_path}")
+
+# Apply CSS from style.css
+load_css("style.css")
 
 # Streamlit page configuration
 st.set_page_config(
