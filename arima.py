@@ -34,22 +34,29 @@ if uploaded_file:
     departure_date = pd.to_datetime(departure_date)
 
     # Calculate the forecast period window (10 days before departure date)
-    forecast_window_start = departure_date - pd.Timedelta(days=10)
+    forecast_window_start = departure_date - pd.Timedelta(days=90)
     forecast_window_end = departure_date
 
-    # Display the valid range for the forecast start date
-    st.write(f"Forecast start date must be between {forecast_window_start.date()} and {forecast_window_end.date()}.")
+# Display the valid range for the forecast start and end dates
+    #st.write(f"Forecast period must be between {forecast_window_start.date()} and {forecast_window_end.date()}.")
 
-    # Section 2: Select the forecast start date
+# Section 2: Select the forecast start date
     forecast_period_start = st.date_input(
         "Select Forecast Start Date",
         min_value=forecast_window_start,
         max_value=forecast_window_end
     )
 
-    # Show the selected forecast start date (if chosen)
-    if forecast_period_start:
-        st.write(f"Selected Forecast Start Date: {forecast_period_start}")
+# Section 3: Select the forecast end date
+    forecast_period_end = st.date_input(
+        "Select Forecast End Date",
+        min_value=forecast_period_start,  # Ensure the end date is after or equal to the start date
+        max_value=forecast_window_end     # Ensure the end date is before or equal to the departure date
+    )
+
+# Validate the selected range and display it
+    if forecast_period_start and forecast_period_end:
+        st.write(f"Selected Forecast Period: {forecast_period_start} to {forecast_period_end}")
 
     # Add a button to generate the plots
     if st.button("Generate Forecast Plots"):
