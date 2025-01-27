@@ -1,12 +1,12 @@
 [theme]
-primaryColor = "#4682B4"  # Steel Blue - cool and professional
-backgroundColor = "#F0F8FF"  # Alice Blue - soft and light background
-secondaryBackgroundColor = "#6A5ACD"  # Slate Blue - a subtle yet vibrant accent
-textColor = "#2F4F4F"  # Dark Slate Gray - good readability without being harsh
-font = "Verdana, Geneva, sans-serif"  # Clean and readable font
+primaryColor = "#4C9F70"  # Medium Sea Green - calming and natural
+backgroundColor = "#FAF9F6"  # Very light beige - neutral and warm
+secondaryBackgroundColor = "#A9A9A9"  # Dark Gray - subtle accent to contrast with light background
+textColor = "#333333"  # Dark Charcoal - for good text readability
+font = "Helvetica, Arial, sans-serif"  # Clean and professional font
 
 # Border Range Configuration (if needed)
 [border]
-borderColor = "#808080"  # Gray - neutral, balanced border color
-borderWidth = "2px"  # 2px border width for clean and refined edges
-borderRadius = "8px"  # Rounded corners with moderate radius for smooth look
+borderColor = "#DCDCDC"  # Gainsboro - light gray border for a soft look
+borderWidth = "2px"  # Thin border for elegance
+borderRadius = "6px"  # Smooth corners with a moderate radius
