@@ -6,6 +6,14 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from sklearn.metrics import mean_absolute_error
 from itertools import product
 
+def apply_custom_css(file_path):
+    with open(file_path) as f:
+        css = f.read()
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+
+# Apply CSS from style.css
+apply_custom_css("style.css")
+
 # Streamlit page configuration
 st.set_page_config(
     page_title="Forecasting Dashboard",
