@@ -1,12 +1,12 @@
 [theme]
-primaryColor = "#5F9EA0"  # Cadet Blue - a muted and sophisticated blue
-backgroundColor = "#F0F8FF"  # Alice Blue - a soft, light background
-secondaryBackgroundColor = "#4682B4"  # Steel Blue - a balanced blue shade
-textColor = "#333333"  # Dark Gray for better readability and contrast
-font = "Arial, Helvetica, sans-serif"  # Font remains Arial
+primaryColor = "#4682B4"  # Steel Blue - cool and professional
+backgroundColor = "#F0F8FF"  # Alice Blue - soft and light background
+secondaryBackgroundColor = "#6A5ACD"  # Slate Blue - a subtle yet vibrant accent
+textColor = "#2F4F4F"  # Dark Slate Gray - good readability without being harsh
+font = "Verdana, Geneva, sans-serif"  # Clean and readable font
 
 # Border Range Configuration (if needed)
 [border]
-borderColor = "#A9A9A9"  # Dark Gray for subtle borders
-borderWidth = "2px"  # Slightly thinner border for a cleaner look
-borderRadius = "8px"  # Rounded corners with a moderate radius
+borderColor = "#808080"  # Gray - neutral, balanced border color
+borderWidth = "2px"  # 2px border width for clean and refined edges
+borderRadius = "8px"  # Rounded corners with moderate radius for smooth look
