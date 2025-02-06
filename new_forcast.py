@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-from datetime import timedelta
+import plotly.graph_objects as go
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from sklearn.metrics import mean_absolute_error
 from itertools import product
+import numpy as np
 from io import BytesIO
 
 # Streamlit page configuration
@@ -23,7 +23,9 @@ if uploaded_file:
     df["Sale Date"] = pd.to_datetime(df["Sale Date"])
     df["Flight Date"] = pd.to_datetime(df["Flight Date"])
     
+    # Get unique sectors
     sectors = df['Sector'].unique()
+    
     flight_dates = sorted(df['Flight Date'].unique())
     departure_date = st.selectbox('Select Departure Date', flight_dates)
     departure_date = pd.to_datetime(departure_date)
@@ -31,15 +33,29 @@ if uploaded_file:
     last_sale_date = df['Sale Date'].max()
     forecast_window_start = max(last_sale_date, departure_date - pd.Timedelta(days=90))
     
-    forecast_period_start = st.date_input("Select Forecast Start Date", min_value=forecast_window_start, max_value=departure_date)
-    forecast_period_end = st.date_input("Select Forecast End Date", min_value=forecast_period_start, max_value=departure_date)
+    forecast_period_start = st.date_input(
+        "Select Forecast Start Date",
+        min_value=forecast_window_start,
+        max_value=departure_date
+    )
     
-    if st.button("Generate Forecast"):
+    forecast_period_end = st.date_input(
+        "Select Forecast End Date",
+        min_value=forecast_period_start,
+        max_value=departure_date
+    )
+    
+    # Button to trigger forecast and download
+    if st.button("Download"):
         forecast_results = []
         
         for selected_sector in sectors:
             df_filtered = df[df['Sector'] == selected_sector]
-            df_grouped = df_filtered.groupby("Sale Date", as_index=False).agg(Avg_YLD_USD=("YLD USD", "mean"))
+            
+            df_grouped = df_filtered.groupby("Sale Date", as_index=False).agg(
+                Avg_YLD_USD=("YLD USD", "mean")
+            )
+            
             df_forecast_data = df_grouped[df_grouped['Sale Date'] <= pd.Timestamp(forecast_period_start)]
             y_train = df_forecast_data["Avg_YLD_USD"]
             
@@ -70,22 +86,23 @@ if uploaded_file:
         
         if forecast_results:
             final_forecast_df = pd.concat(forecast_results)
+            
             avg_yield_per_sector = final_forecast_df.groupby("Sector")["Predicted Yield (Exp Smoothing)"].mean().reset_index()
             avg_yield_per_sector.columns = ["Sector", "Average Predicted Yield (USD)"]
             
-            st.write("### Sector-wise Average Predicted Yield Table")
-            st.table(avg_yield_per_sector)
-            
-            # Convert DataFrame to an Excel file
+            # Convert the DataFrame to an in-memory Excel file
             def convert_df_to_excel(df):
+                # Create a BytesIO buffer
                 buffer = BytesIO()
                 with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
                     df.to_excel(writer, index=False, sheet_name="Forecast Data")
-                buffer.seek(0)
+                buffer.seek(0)  # Rewind the buffer to the beginning
                 return buffer
-            
+
+            # Create the Excel file
             excel_file = convert_df_to_excel(avg_yield_per_sector)
-            
+
+            # Create the download button
             st.download_button(
                 label="Download Sector-wise Average Predicted Yield Table",
                 data=excel_file,
