@@ -169,9 +169,18 @@ if uploaded_file:
         # Display the actual vs predicted table
         st.write("Actual vs Predicted Yield Table", forecast_table)
 
-        # Plot the actual vs predicted yields for the forecast period
+        # Calculate Bollinger Bands on actual yield data
+        window = 7  # Adjust window size as needed
+        df_grouped["Rolling Mean"] = df_grouped["Avg_YLD_USD"].rolling(window=window).mean()
+        df_grouped["Rolling Std"] = df_grouped["Avg_YLD_USD"].rolling(window=window).std()
+
+        df_grouped["Upper Band"] = df_grouped["Rolling Mean"] + (2 * df_grouped["Rolling Std"])
+        df_grouped["Lower Band"] = df_grouped["Rolling Mean"] - (2 * df_grouped["Rolling Std"])
+
+        # Plot actual vs predicted yield with Bollinger Bands
         fig_pred = go.Figure()
 
+        # Actual Yield
         fig_pred.add_trace(go.Scatter(
             x=df_grouped['Sale Date'],
             y=df_grouped['Avg_YLD_USD'],
@@ -179,6 +188,7 @@ if uploaded_file:
             name='Actual Yield'
         ))
 
+        # Predicted Yield
         fig_pred.add_trace(go.Scatter(
             x=forecast_df["Sale Date"],
             y=forecast_df["Predicted Yield (Exp Smoothing)"],
@@ -187,14 +197,36 @@ if uploaded_file:
             line=dict(dash="dash")
         ))
 
+        # Upper Bollinger Band
+        fig_pred.add_trace(go.Scatter(
+            x=df_grouped['Sale Date'],
+            y=df_grouped["Upper Band"],
+            mode='lines',
+            line=dict(width=0.8, color='lightblue'),
+            name="Upper Bollinger Band"
+        ))
+
+# Lower Bollinger Band
+        fig_pred.add_trace(go.Scatter(
+            x=df_grouped['Sale Date'],
+            y=df_grouped["Lower Band"],
+            mode='lines',
+            line=dict(width=0.8, color='lightblue'),
+            fill='tonexty',  # Shading the area between bands
+            name="Lower Bollinger Band"
+        ))
+
+# Update layout
         fig_pred.update_layout(
-            title="Actual vs Predicted Average Yield (Exp Smoothing)",
+            title="Actual vs Predicted Average Yield with Bollinger Bands",
             xaxis_title="Sale Date",
             yaxis_title="Average Yield (USD)",
             template="plotly_dark"
         )
 
-        st.plotly_chart(fig_pred)
+# Display the plot in Streamlit
+st.plotly_chart(fig_pred)
+
         # Create a final table with forecast dates and predicted yield values
         final_forecast_table = pd.DataFrame({
             "Forecast Date": forecast_df["Sale Date"].dt.date,  # Convert to date format
