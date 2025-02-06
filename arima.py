@@ -195,11 +195,12 @@ if uploaded_file:
         )
 
         st.plotly_chart(fig_pred)
-        # Create a final table with only departure date and predicted yield
+        # Create a final table with forecast dates and predicted yield values
         final_forecast_table = pd.DataFrame({
-            "Forcast Date": [forecast_df["Sale Date"].date()],  # Ensure it's in date format
-            "Predicted Yield (USD)": forecast_df["Predicted Yield (Exp Smoothing)"]  # Last forecasted value
+            "Forecast Date": forecast_df["Sale Date"].dt.date,  # Convert to date format
+            "Predicted Yield (USD)": forecast_df["Predicted Yield (Exp Smoothing)"]
         })
 
         # Display the final table
-        st.write("Predicted Yield for Forecast Date", final_forecast_table)
+        st.write("Predicted Yield for Forecast Dates", final_forecast_table)
+
