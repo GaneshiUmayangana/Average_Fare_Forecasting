@@ -173,20 +173,19 @@ if uploaded_file:
         
         # Define window size for Bollinger Bands
         # Define window size for Bollinger Bands
-        import numpy as np
 
         window = 7  # Bollinger Band window size
 
-# Initialize lists for Bollinger Bands with past 7 actual days
+        # Initialize lists for Bollinger Bands
         upper_band = []
         lower_band = []
 
-# Get the last 7 actual yield values before the forecast starts
-        historical_yields = df_grouped[df_grouped["Sale Date"] < forecast_period_start]["Avg_YLD_USD"].tolist()
+        # Get the last 7 actual yield values before the forecast starts
+        historical_yields = df_grouped[df_grouped["Sale Date"] < forecast_df["Sale Date"].min()]["Avg_YLD_USD"].tolist()
 
         for predicted_value in forecast_df["Predicted Yield (Exp Smoothing)"]:
             if len(historical_yields) >= window:
-        # Compute moving average and standard deviation for last 7 values
+        # Compute rolling mean & standard deviation for last 7 values (from historical + predicted)
                 moving_avg = np.mean(historical_yields[-window:])
                 std_dev = np.std(historical_yields[-window:])
 
@@ -247,7 +246,7 @@ if uploaded_file:
 
 # Update graph layout
         fig_pred.update_layout(
-            title="Actual vs Predicted Average Yield with Bollinger Bands (Forecast Period Only)",
+            title="Actual vs Predicted Average Yield with Bollinger Bands (Using Last 7 Actual Values)",
             xaxis_title="Sale Date",
             yaxis_title="Average Yield (USD)",
             template="plotly_dark"
@@ -266,3 +265,4 @@ if uploaded_file:
 
 # Display table in Streamlit
         st.write("### Predicted Yield for Forecast Dates", final_forecast_table)
+
