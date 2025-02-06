@@ -225,7 +225,7 @@ if uploaded_file:
         )
 
 # Display the plot in Streamlit
-st.plotly_chart(fig_pred)
+        st.plotly_chart(fig_pred)
 
         # Create a final table with forecast dates and predicted yield values
         final_forecast_table = pd.DataFrame({
