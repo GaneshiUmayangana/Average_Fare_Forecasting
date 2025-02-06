@@ -173,19 +173,42 @@ if uploaded_file:
         
         # Define window size for Bollinger Bands
         # Define window size for Bollinger Bands
-        window = 7  # Adjust if needed
+        import numpy as np
 
-# Calculate rolling mean & standard deviation for predicted values only
-        forecast_df["Rolling Mean"] = forecast_df["Predicted Yield (Exp Smoothing)"].rolling(window=window).mean()
-        forecast_df["Rolling Std"] = forecast_df["Predicted Yield (Exp Smoothing)"].rolling(window=window).std()
+        window = 7  # Bollinger Band window size
 
-        forecast_df["Upper Band"] = forecast_df["Rolling Mean"] + (2 * forecast_df["Rolling Std"])
-        forecast_df["Lower Band"] = forecast_df["Rolling Mean"] - (2 * forecast_df["Rolling Std"])
+# Initialize lists for Bollinger Bands with past 7 actual days
+        upper_band = []
+        lower_band = []
 
-# Plot actual vs predicted yield with Bollinger Bands (forecast period only)
+# Get the last 7 actual yield values before the forecast starts
+        historical_yields = df_grouped[df_grouped["Sale Date"] < forecast_period_start]["Avg_YLD_USD"].tolist()
+
+        for predicted_value in forecast_df["Predicted Yield (Exp Smoothing)"]:
+            if len(historical_yields) >= window:
+        # Compute moving average and standard deviation for last 7 values
+                moving_avg = np.mean(historical_yields[-window:])
+                std_dev = np.std(historical_yields[-window:])
+
+        # Compute Bollinger Bands
+                upper_band.append(moving_avg + 2 * std_dev)
+                lower_band.append(moving_avg - 2 * std_dev)
+            else:
+        # If insufficient data, set NaN
+                upper_band.append(None)
+                lower_band.append(None)
+
+    # Append predicted value to historical list for the next step
+            historical_yields.append(predicted_value)
+
+# Add Bollinger Bands to forecast DataFrame
+        forecast_df["Upper Band"] = upper_band
+        forecast_df["Lower Band"] = lower_band
+
+# --- 🔹 Plot Actual vs Predicted Yield with Bollinger Bands ---
         fig_pred = go.Figure()
 
-# Actual Yield
+# Actual Yield (White Line)
         fig_pred.add_trace(go.Scatter(
             x=df_grouped['Sale Date'],
             y=df_grouped['Avg_YLD_USD'],
@@ -194,7 +217,7 @@ if uploaded_file:
             line=dict(color='white')
         ))
 
-# Predicted Yield
+# Predicted Yield (Dashed Red Line)
         fig_pred.add_trace(go.Scatter(
             x=forecast_df["Sale Date"],
             y=forecast_df["Predicted Yield (Exp Smoothing)"],
@@ -203,7 +226,7 @@ if uploaded_file:
             line=dict(dash="dash", color='red')
         ))
 
-# Upper Bollinger Band (Forecast Period Only)
+# Upper Bollinger Band (Light Blue)
         fig_pred.add_trace(go.Scatter(
             x=forecast_df['Sale Date'],
             y=forecast_df["Upper Band"],
@@ -212,7 +235,7 @@ if uploaded_file:
             name="Upper Bollinger Band (Forecast)"
         ))
 
-# Lower Bollinger Band (Forecast Period Only)
+# Lower Bollinger Band (Light Blue + Shaded Area)
         fig_pred.add_trace(go.Scatter(
             x=forecast_df['Sale Date'],
             y=forecast_df["Lower Band"],
@@ -222,7 +245,7 @@ if uploaded_file:
             name="Lower Bollinger Band (Forecast)"
         ))
 
-# Update layout
+# Update graph layout
         fig_pred.update_layout(
             title="Actual vs Predicted Average Yield with Bollinger Bands (Forecast Period Only)",
             xaxis_title="Sale Date",
@@ -230,13 +253,10 @@ if uploaded_file:
             template="plotly_dark"
         )
 
-# Display the plot in Streamlit
+# Display graph in Streamlit
         st.plotly_chart(fig_pred)
 
-    
-
-
-        # Create a final table with forecast dates, predicted yield, and Bollinger Bands
+# --- 🔹 Create Forecast Table ---
         final_forecast_table = pd.DataFrame({
             "Forecast Date": forecast_df["Sale Date"].dt.date,  # Convert to date format
             "Predicted Yield (USD)": forecast_df["Predicted Yield (Exp Smoothing)"],
@@ -244,5 +264,5 @@ if uploaded_file:
             "Lower Bollinger Band (USD)": forecast_df["Lower Band"]
         })
 
-# Display the final table
-        st.write("Predicted Yield for Forecast Dates", final_forecast_table)
+# Display table in Streamlit
+        st.write("### Predicted Yield for Forecast Dates", final_forecast_table)
