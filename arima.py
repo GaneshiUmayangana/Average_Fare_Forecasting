@@ -170,37 +170,52 @@ if uploaded_file:
         st.write("Actual vs Predicted Yield Table", forecast_table)
 
         # Calculate Bollinger Bands on actual yield data
-        window = 7  # Adjust window size as needed
+        
+        # Define window size for Bollinger Bands
+        window = 7  # Adjust if needed
+
+        # Calculate rolling mean & standard deviation for actual data
         df_grouped["Rolling Mean"] = df_grouped["Avg_YLD_USD"].rolling(window=window).mean()
         df_grouped["Rolling Std"] = df_grouped["Avg_YLD_USD"].rolling(window=window).std()
 
         df_grouped["Upper Band"] = df_grouped["Rolling Mean"] + (2 * df_grouped["Rolling Std"])
         df_grouped["Lower Band"] = df_grouped["Rolling Mean"] - (2 * df_grouped["Rolling Std"])
 
-        # Plot actual vs predicted yield with Bollinger Bands
+# Extend Bollinger Bands into the forecast period using predicted values
+        forecast_df["Rolling Mean"] = forecast_df["Predicted Yield (Exp Smoothing)"].rolling(window=window).mean()
+        forecast_df["Rolling Std"] = forecast_df["Predicted Yield (Exp Smoothing)"].rolling(window=window).std()
+
+        forecast_df["Upper Band"] = forecast_df["Rolling Mean"] + (2 * forecast_df["Rolling Std"])
+        forecast_df["Lower Band"] = forecast_df["Rolling Mean"] - (2 * forecast_df["Rolling Std"])
+
+# Combine actual and predicted for smooth plotting
+        combined_df = pd.concat([df_grouped, forecast_df], ignore_index=True)
+
+# Plot actual vs predicted yield with Bollinger Bands
         fig_pred = go.Figure()
 
-        # Actual Yield
+# Actual Yield
         fig_pred.add_trace(go.Scatter(
             x=df_grouped['Sale Date'],
             y=df_grouped['Avg_YLD_USD'],
             mode='lines',
-            name='Actual Yield'
+            name='Actual Yield',
+            line=dict(color='white')
         ))
 
-        # Predicted Yield
+# Predicted Yield
         fig_pred.add_trace(go.Scatter(
             x=forecast_df["Sale Date"],
             y=forecast_df["Predicted Yield (Exp Smoothing)"],
             mode='lines',
             name="Predicted Yield (Exp Smoothing)",
-            line=dict(dash="dash")
+            line=dict(dash="dash", color='yellow')
         ))
 
-        # Upper Bollinger Band
+# Upper Bollinger Band
         fig_pred.add_trace(go.Scatter(
-            x=df_grouped['Sale Date'],
-            y=df_grouped["Upper Band"],
+            x=combined_df['Sale Date'],
+            y=combined_df["Upper Band"],
             mode='lines',
             line=dict(width=0.8, color='lightblue'),
             name="Upper Bollinger Band"
@@ -208,11 +223,11 @@ if uploaded_file:
 
 # Lower Bollinger Band
         fig_pred.add_trace(go.Scatter(
-            x=df_grouped['Sale Date'],
-            y=df_grouped["Lower Band"],
+            x=combined_df['Sale Date'],
+            y=combined_df["Lower Band"],
             mode='lines',
             line=dict(width=0.8, color='lightblue'),
-            fill='tonexty',  # Shading the area between bands
+            fill='tonexty',  # Fills the area between bands
             name="Lower Bollinger Band"
         ))
 
@@ -226,6 +241,7 @@ if uploaded_file:
 
 # Display the plot in Streamlit
         st.plotly_chart(fig_pred)
+
 
         # Create a final table with forecast dates and predicted yield values
         final_forecast_table = pd.DataFrame({
