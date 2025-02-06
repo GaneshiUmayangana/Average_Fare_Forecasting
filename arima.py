@@ -30,7 +30,7 @@ if uploaded_file:
     sectors = df['Sector'].unique()
     selected_sector = st.selectbox('Select Sector', sectors)
 
-    flight_dates = df['Flight Date'].unique()
+    flight_dates = sorted(df['Flight Date'].unique())
     departure_date = st.selectbox('Select Departure Date', flight_dates)
     departure_date = pd.to_datetime(departure_date)
 
