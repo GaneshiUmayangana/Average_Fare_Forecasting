@@ -241,7 +241,7 @@ if uploaded_file:
             y=forecast_df["Lower Band"],
             mode='lines',
             line=dict(width=0.8, color='lightblue'),
-            fill='tonexty',  # Fill the area between bands
+            #fill='tonexty',  # Fill the area between bands
             name="Lower Bollinger Band (Forecast)"
         ))
 
