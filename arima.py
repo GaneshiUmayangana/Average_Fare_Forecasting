@@ -147,7 +147,7 @@ if uploaded_file:
                 continue  # In case of any errors (e.g., singular matrix)
 
         # Output the best parameters
-        st.write(f"Best model parameters: Trend = {best_params[0]}, Seasonal = {best_params[1]}, Seasonal Periods = {best_params[2]}")
+        #st.write(f"Best model parameters: Trend = {best_params[0]}, Seasonal = {best_params[1]}, Seasonal Periods = {best_params[2]}")
 
         # Forecast from the forecast start date to the departure date
         forecast_dates = pd.date_range(forecast_period_start, forecast_period_end, freq='D')
@@ -195,3 +195,11 @@ if uploaded_file:
         )
 
         st.plotly_chart(fig_pred)
+        # Create a final table with only departure date and predicted yield
+        final_forecast_table = pd.DataFrame({
+            "Departure Date": [departure_date.date()],  # Ensure it's in date format
+            "Predicted Yield (USD)": [y_pred_es.iloc[-1]]  # Last forecasted value
+        })
+
+        # Display the final table
+        st.write("Predicted Yield for Departure Date", final_forecast_table)
