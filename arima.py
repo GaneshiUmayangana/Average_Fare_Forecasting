@@ -60,7 +60,7 @@ if uploaded_file:
         st.write(f"Selected Forecast Period: {forecast_period_start} to {forecast_period_end}")
 
     # Add a button to generate the plots
-    if st.button("Generate Forecast Plots"):
+    if st.button("Generate Forecast"):
         # Filter data based on the selected sector
         df_filtered = df[df['Sector'] == selected_sector]
 
@@ -101,7 +101,7 @@ if uploaded_file:
         ))
 
         fig.update_layout(
-            title=f"Time Series of Average Yield for {selected_sector}",
+            title=f"Average Yield for {selected_sector}",
             xaxis_title="Sale Date",
             yaxis_title="Average Yield (USD)",
             template="plotly_dark"
@@ -247,7 +247,7 @@ if uploaded_file:
 
 # Update graph layout
         fig_pred.update_layout(
-            title="Actual vs Predicted Average Yield with Bollinger Bands (Using Last 7 Actual Values)",
+            title="Actual vs Predicted Average Yield ",
             xaxis_title="Sale Date",
             yaxis_title="Average Yield (USD)",
             template="plotly_dark"
