@@ -31,7 +31,7 @@ if uploaded_file:
     departure_date = pd.to_datetime(departure_date)
     
     last_sale_date = df['Sale Date'].max()
-    #forecast_window_start = max(last_sale_date, departure_date - pd.Timedelta(days=90))
+    forecast_window_start = max(last_sale_date, departure_date - pd.Timedelta(days=90))
     
     forecast_window_start = forecast_window_start.date()
     departure_date = departure_date.date()
